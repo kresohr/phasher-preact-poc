@@ -1,29 +1,36 @@
-import { useEffect, useRef } from 'preact/hooks';
-import type { MutableRef } from 'preact/hooks';
-import Phaser from 'phaser';
-import { createGameConfig } from '../game/main';
-import type { GameMode } from '../App';
+import { useEffect, useRef } from "preact/hooks";
+import type { MutableRef } from "preact/hooks";
+import Phaser from "phaser";
+import { createTicTacToeConfig } from "../game/tictactoe/config";
+import { createRacesimConfig } from "../game/racesim/config";
+import type { GameMode } from "../App";
+import type { GameChoice } from "./Dashboard";
 
 interface PhaserGameProps {
-    mode: GameMode;
-    gameRef: MutableRef<Phaser.Game | null>;
+  gameChoice: GameChoice;
+  /** only used by tictactoe */
+  mode?: GameMode;
+  gameRef: MutableRef<Phaser.Game | null>;
 }
 
-export function PhaserGame({ mode, gameRef }: PhaserGameProps) {
-    const containerRef = useRef<HTMLDivElement>(null);
+export function PhaserGame({ gameChoice, mode, gameRef }: PhaserGameProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
-        if (!containerRef.current || gameRef.current) return;
+  useEffect(() => {
+    if (!containerRef.current || gameRef.current) return;
 
-        gameRef.current = new Phaser.Game(
-            createGameConfig(containerRef.current, mode)
-        );
+    const config =
+      gameChoice === "racesim"
+        ? createRacesimConfig(containerRef.current)
+        : createTicTacToeConfig(containerRef.current, mode ?? "pvp");
 
-        return () => {
-            gameRef.current?.destroy(true);
-            gameRef.current = null;
-        };
-    }, []); // run once on mount
+    gameRef.current = new Phaser.Game(config);
 
-    return <div class="phaser-container" ref={containerRef} />;
+    return () => {
+      gameRef.current?.destroy(true);
+      gameRef.current = null;
+    };
+  }, []); // run once on mount
+
+  return <div class="phaser-container" ref={containerRef} />;
 }
