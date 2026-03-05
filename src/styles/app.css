@@ -1,0 +1,155 @@
+/* ── Game wrapper: canvas + HUD stacked vertically ── */
+.game-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+}
+
+.phaser-container canvas {
+    display: block;
+}
+
+/* ── HUD ── */
+.hud {
+    width: 540px;
+    background: #0f3460;
+    border-top: 2px solid #16213e;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.hud-scores {
+    display: flex;
+    gap: 14px;
+}
+
+.score {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 44px;
+}
+
+.score-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.7;
+}
+
+.score-value {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.score-x .score-value { color: #e94560; }
+.score-draw .score-value { color: #d0d0e8; }
+.score-o .score-value { color: #4ecca3; }
+
+.hud-status {
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    flex: 1;
+    color: #f0f0f0;
+    letter-spacing: 0.5px;
+}
+
+.hud-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.hud-btn {
+    padding: 7px 16px;
+    border: 2px solid #4ecca3;
+    background: transparent;
+    color: #4ecca3;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.18s, color 0.18s;
+    white-space: nowrap;
+}
+
+.hud-btn:hover {
+    background: #4ecca3;
+    color: #1a1a2e;
+}
+
+.hud-btn.secondary {
+    border-color: #8888aa;
+    color: #8888aa;
+}
+
+.hud-btn.secondary:hover {
+    background: #8888aa;
+    color: #1a1a2e;
+}
+
+/* ── Menu ── */
+.menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding: 60px 40px;
+    background: #0f3460;
+    border-radius: 16px;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+    min-width: 320px;
+}
+
+.menu-title {
+    font-size: 48px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, #e94560, #4ecca3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
+}
+
+.menu-subtitle {
+    font-size: 15px;
+    color: #8888aa;
+    margin: -14px 0 0;
+    letter-spacing: 1px;
+}
+
+.menu-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+}
+
+.menu-btn {
+    width: 100%;
+    padding: 14px 0;
+    border: 2px solid #4ecca3;
+    background: transparent;
+    color: #4ecca3;
+    border-radius: 8px;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: background 0.18s, color 0.18s, transform 0.12s;
+}
+
+.menu-btn:hover {
+    background: #4ecca3;
+    color: #0f3460;
+    transform: translateY(-2px);
+}
+
+.menu-btn:active {
+    transform: translateY(0);
+}
